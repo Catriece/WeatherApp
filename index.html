@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <main id="background-image">
+        <div id="temp-box" class="box weatherBox">
+            <div id="temp-info">
+                <p id="city-name">Sanford</p>
+                <p id="city-temp">88</p>
+                <p id="city-sky">Cloudy</p>
+                <p id="weather-hi" class="hi-lo">H: 90</p>
+                <p id="weather-lo" class="hi-lo">L: 75</p>
+            </div>
+        </div>
+        <div id="chooseUnit">
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+              </label>
+        </div>
+        <div id="searchbar" class="box">
+            <form id="submission">
+                <label for="city-input"><input id="city-input" type="text" placeholder="City">
+                </label>
+                <label for="state-input"><input id="state-input" maxlength="2" type="text" placeholder="State">
+                </label>
+                <label for="country-input"><input id="country-input" maxlength="2" type="text" placeholder="Country">
+                </label>
+                <button type="submit">Go</button>
+            </form>
+        </div>
+        <div id="savedInput" class="box weatherBox">
+            <table id="savedCitiesTable">
+                <tr id="new-tr">
+                    <td id="city-td">
+                        <li id="saved-city" class="saved-item"></li> 
+                    </td>
+                    <td id="temp-td">
+                        <li id="saved-temp" class="saved-item"></li>
+                    </td>
+                    <button id="show-data">^</button>
+                    <button id="erase-data">X</button>
+                </tr> 
+            </table>
+            
+        </div>
+    </main>
+</body>
+</html>
