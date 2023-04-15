@@ -1,56 +1,86 @@
-// Save searches
-// retrieve saved searches
-//if slider clicked change this
-// depending on sky, change background
-
-
-
-/*async function findLocation () {
-    let weather_url = "";
-    let query_params = "";
-    let api_key = "";
-    let units = "";
-}*/
-
 //pull from DOM
-//background
-const backgroundImage = document.getElementById("background-image");
+
+const backgroundImage = document.querySelector("#background-image");
+backgroundImage.style.backgroundImage = "images/white-cloud-blue-sky.jpg";
+
 //form elements
 const city = document.getElementById("city-input");
 const state = document.getElementById("state-input");
 const country = document.getElementById("country-input");
+
 //showcased data elements
 const cityTemp = document.getElementById("city-temp");
 const cityName = document.getElementById("city-name");
 const citySky = document.getElementById("city-sky");
 const tempHigh = document.getElementById("weather-hi");
 const tempLow = document.getElementById("weather-lo");
+
 //url info
 const weather_url ="https://api.openweathermap.org/data/2.5/weather?q="
 const api_key = "&appid=1ebb37266d27bc74323d4653d3899d6f&units=imperial"
 //const units_url = `&units=${units}`
 
 //Submit Input
-const form = document.getElementById("submission");
-form.addEventListener("submit", (event) => {
-   event.preventDefault();
-  console.log("hello")
-   const query_params =`${city.value},${state.value},${country.value}`;
+function submitInfo() {
+    const form = document.getElementById("submission");
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        console.log("hello")
+        const query_params =`${city.value},${state.value},${country.value}`;
+
+        fetch(weather_url + query_params + api_key)
+        .then((res) => {
+            ButtonStorage(res);
+            return res.json();
+        }).then((weather) => {
+            displayWeather(weather);
+        }).catch((err) => {
+            console.error(err);
+            alert("Please Enter a Proper Location");
+        })});
+        form.reset();
+    }
+
+const submitBtn = document.getElementById("submit-button");
+submitBtn.addEventListener("submit", submitInfo());
 
 
-   fetch(weather_url + query_params + api_key)
-   .then((res) => {
-       //console.log(res);
-       return res.json();
-   }).then((weather) => {
-       displayWeather(weather);
-   }).catch((err) => {
-       console.error(err);
-       alert("Please Enter a Proper Location");
-   })});
+
+function optionSave(weather) {
+    const table = document.getElementById("savedCitiesTable");
+    const newTr = document.createElement("tr");
+    //newTr.classList.add
+    const tdCity = document.createElement("td");
+    const tdIcon = document.createElement("td");
+    const tdTemp = document.createElement("td");
+    const showCityBtn = docment.createElement("button");
+    const removeCityBtn = document.createElement("Button");
+
+    tdCity.textContent = weather.name;
+    //tdIcon
+    tdTemp.textContent = Math.round(weather.main.temp);
+    showCityBtn.classList.add
+}
+
+
+
+function ButtonStorage(res) {
+    const citySaveBtn = document.createElement("button");
+    const newButtonHome = document.getElementById("saveCityBtn");
+    let buttonID = 0
+    citySaveBtn.id = `citySave${weather.name}`;
+    citySaveBtn.textContent = "+";
+    citySaveBtn.setAttribute("url", res.url);
+
+    newButtonHome.appendChild(citySaveBtn);
+    console.log(citySaveBtn); 
+    }
+
+
 
 
 //Functions
+
 
 function displayWeather(weather){     
    console.log(weather);
@@ -61,19 +91,16 @@ function displayWeather(weather){
    tempLow.textContent = `L: ${Math.round(weather.main.temp_min)}`;
 
    changeBackground(citySky);
-   form.reset();
+   
 }
 
-/*function chooseUnit(checkbox) {
-    if (checkbox != true) {
-
-    }
-}*/
+//Toggle Units
 
 function changeBackground(citySky) {
+    //const backgroundImage = document.getElementById("background-image");
     if(citySky.textContent == "clear sky") {
-        //backgroundImage.textContent = "";
-        console.log("CLEAR");
+        //backgroundImage.style.backgroundImage = "images/white-cloud-blue-sky.jpg";
+        console.log(citySky);
     }
     if(citySky.textContent == "few clouds" || citySky.textContent == "scattered clouds" || citySky.textContent == "broken clouds") {
         console.log("CLOUDY");
@@ -90,30 +117,6 @@ function changeBackground(citySky) {
     if(citySky.textContent == "mist") {
         console.log("MIST");
     } 
-}
-
-class SavedCities {
-    list = []
-    id = 0
-
-    newListItem() {
-        const table = document.getElementById("savedCitiesTable");
-        const newTr = document.getElementById("new-tr");
-        //newTr.classList.add[0]
-        const cityTd = document.getElementById("city-td");
-        const tempTd = document.getElementById("temp-td")
-        const liCity = document.getElementById("saved-city");
-        const liTemp = document.getElementById("saved-temp"); 
-    }
-
-    addCity() {
-
-    }
-
-    removeCity() {
-
-    }
-
 }
 
 

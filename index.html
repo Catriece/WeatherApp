@@ -9,47 +9,54 @@
     <title>Document</title>
 </head>
 <body>
-    <main id="background-image">
-        <div id="temp-box" class="box weatherBox">
-            <div id="temp-info">
-                <p id="city-name">Sanford</p>
-                <p id="city-temp">88</p>
-                <p id="city-sky">Cloudy</p>
-                <p id="weather-hi" class="hi-lo">H: 90</p>
-                <p id="weather-lo" class="hi-lo">L: 75</p>
+    <main>
+        <div id="background-image">
+            <div id="saveCityBtn">
+                <!--<button id="citySaveBtn" type="button">+</button>-->
             </div>
-        </div>
-        <div id="chooseUnit">
-            <label class="switch">
-                <input type="checkbox">
-                <span class="slider round"></span>
-              </label>
-        </div>
-        <div id="searchbar" class="box">
-            <form id="submission">
-                <label for="city-input"><input id="city-input" type="text" placeholder="City">
+            <div id="temp-box" class="box weatherBox">
+                <div id="temp-info">
+                    <p id="city-name">Sanford</p>
+                    <p id="city-temp">88</p>
+                    <p id="city-sky">Cloudy</p>
+                    <p id="weather-hi" class="hi-lo">H: 90</p>
+                    <p id="weather-lo" class="hi-lo">L: 75</p>
+                </div>
+            </div>
+            <div id="chooseUnit">
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
                 </label>
-                <label for="state-input"><input id="state-input" maxlength="2" type="text" placeholder="State">
-                </label>
-                <label for="country-input"><input id="country-input" maxlength="2" type="text" placeholder="Country">
-                </label>
-                <button type="submit">Go</button>
-            </form>
-        </div>
-        <div id="savedInput" class="box weatherBox">
-            <table id="savedCitiesTable">
-                <tr id="new-tr">
-                    <td id="city-td">
-                        <li id="saved-city" class="saved-item"></li> 
-                    </td>
-                    <td id="temp-td">
-                        <li id="saved-temp" class="saved-item"></li>
-                    </td>
-                    <button id="show-data">^</button>
-                    <button id="erase-data">X</button>
-                </tr> 
-            </table>
-            
+            </div>
+            <div id="searchbar" class="box">
+                <form id="submission">
+                    <label for="city-input"><input id="city-input" type="text" placeholder="City">
+                    </label>
+                    <label for="state-input"><input id="state-input" maxlength="2" type="text" placeholder="State">
+                    </label>
+                    <label for="country-input"><input id="country-input" maxlength="2" type="text" placeholder="Country">
+                    </label>
+                    <button id="submit-button" type="submit">Go</button>
+                </form>
+            </div>
+            <div id="savedInput" class="box weatherBox">
+                <table id="savedCitiesTable">
+                    <tr id="new-tr">
+                        <!--<p id="url"></p>-->
+                        <td id="city-td">
+                            <li id="saved-city" class="saved-item"></li> 
+                        </td>
+                        <td id="icon-image">
+                            <img src="" alt="">
+                        </td>
+                        <td id="temp-td"></td>
+                        <td id="show-data-btn"></td>
+                        <td id="erase-data-btn"></td>
+                    </tr> 
+                </table>
+                
+            </div>
         </div>
     </main>
 </body>
