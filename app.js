@@ -1,7 +1,7 @@
 //pull from DOM
 
-const backgroundImage = document.querySelector("#background-image");
-backgroundImage.style.backgroundImage = "images/white-cloud-blue-sky.jpg";
+const backgroundImage = document.querySelector("#background");
+//backgroundImage.style.backgroundImage = "images/white-cloud-blue-sky.jpg";
 
 //form elements
 const city = document.getElementById("city-input");
@@ -34,11 +34,12 @@ function submitInfo() {
             return res.json();
         }).then((weather) => {
             displayWeather(weather);
+            
         }).catch((err) => {
             console.error(err);
             alert("Please Enter a Proper Location");
         })});
-        form.reset();
+        
     }
 
 const submitBtn = document.getElementById("submit-button");
@@ -49,32 +50,65 @@ submitBtn.addEventListener("submit", submitInfo());
 function optionSave(weather) {
     const table = document.getElementById("savedCitiesTable");
     const newTr = document.createElement("tr");
-    //newTr.classList.add
+    newTr.classList.add(ButtonStorage(res));
+    console.log(newTr);
     const tdCity = document.createElement("td");
-    const tdIcon = document.createElement("td");
+    //const tdIcon = document.createElement("td");
     const tdTemp = document.createElement("td");
+    const tdShowData = document.createElement("td");
     const showCityBtn = docment.createElement("button");
-    const removeCityBtn = document.createElement("Button");
+    //const tdRemoveData = document.createElement("td");
+    //const removeCityBtn = document.createElement("Button");
 
     tdCity.textContent = weather.name;
     //tdIcon
     tdTemp.textContent = Math.round(weather.main.temp);
-    showCityBtn.classList.add
+    showCityBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        submitInfo();
+    });
+
+    //removeCityBtn.addEventListener("click", (e))
+
+    newTr.appendChild(tdCity);
+    //newTr.appendChild(tdIcon);
+    newTr.appendChild(tdTemp);
+    tdShowData.appendChild(showCityBtn);
+    //tdRemoveData.appendChild(removeCityBtn);
+    newTr.appendChild(tdShowData);
+    //newTr.appendChild(tdRemoveData);
+    console.log(newTr);
+    table.appendChild(newTr);
+
 }
 
+const saveBtn = document.getElementById("save");
+saveBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    optionSave(weather);
+    form.reset();
+    
+})
+
+//const citySaveBtn = document.createElement("button");
+//const newButtonHome = document.getElementById("saveCityBtn");
 
 
 function ButtonStorage(res) {
-    const citySaveBtn = document.createElement("button");
-    const newButtonHome = document.getElementById("saveCityBtn");
-    let buttonID = 0
-    citySaveBtn.id = `citySave${weather.name}`;
-    citySaveBtn.textContent = "+";
-    citySaveBtn.setAttribute("url", res.url);
-
-    newButtonHome.appendChild(citySaveBtn);
-    console.log(citySaveBtn); 
+    //const citySaveBtn = document.createElement("button");
+    //const newButtonHome = document.getElementById("saveCityBtn");
+    //citySaveBtn.id = res.url;
+    //citySaveBtn.textContent = "+";
+    //citySaveBtn.setAttribute("url", res.url);
+    //newButtonHome.appendChild(citySaveBtn);
+    //list.push(citySaveBtn);
+    //console.log(citySaveBtn); 
+    saveBtn.id = res.url;
+    saveBtn.textContent = "+";
+    saveBtn.setAttribute("url", res.url);
+    console.log(saveBtn)
     }
+    
 
 
 
