@@ -55,9 +55,15 @@ p {
     font-size: 15px;
 }
 
-#searchInquiry {
+.search-inputs {
     border-radius: 8px;
 }
+
+#state-input, #country-input {
+  width: 2rem;
+  text-align: center;
+}
+
 
 .switch {
     position: relative;
@@ -119,3 +125,7 @@ p {
     border-radius: 50%;
   }
 
+  #new-tr {
+    border: 1px black solid;
+    
+  }

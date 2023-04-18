@@ -1,3 +1,5 @@
+//BACKGROUND
+
 //FORM ELEMENTS
 const city = document.getElementById("city-input");
 const state = document.getElementById("state-input");
@@ -29,73 +31,106 @@ function submitInfo() {
             return res.json();
         }).then((weather) => {
             displayWeather(weather);
-            saveData(weather);
+            storeWeather(weather);
+            newSaveButton(weather);
+            form.reset();
         }).catch((err) => {
             console.error(err);
             alert("Please Enter a Proper Location");
         })});
         
     }
+const addButton = document.getElementById("save-button");
+const saveButton = document.createElement("button");
 
 const submitBtn = document.getElementById("submit-button");
 submitBtn.addEventListener("submit", submitInfo());
 
-//FUNCTIONS
-let cityWeatherData = []
-function displayWeather(weather){     
-    //console.log(weather);
+
+// FUNCTIONS FOR ONSCREEN DISPLAY
+let x = 0
+function newSaveButton (weather) {
+    
+    saveButton.textContent = "+";
+    saveButton.id = "Button" + x;
+    console.log(saveButton.id);
+    x++
+
+    addButton.appendChild(saveButton);
+
+    saveButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        savedOnscreenData(weather);
+        addButton.removeChild(saveButton);
+    });
+        
+};
+
+function displayWeather(weather){   
+    
     cityName.textContent = weather.name;
     cityTemp.textContent = Math.round(weather.main.temp);
     citySky.textContent = weather.weather[0].description;
     tempHigh.textContent = `H: ${Math.round(weather.main.temp_max)}`;
-    tempLow.textContent = `L: ${Math.round(weather.main.temp_min)}`;
+    tempLow.textContent = `L: ${Math.round(weather.main.temp_min)}`; 
 
-    let cityWeather = new Set();
-    cityWeather.add(weather.name)
-    cityWeather.add(Math.round(weather.main.temp));
-    cityWeather.add(weather.weather[0].description);
-    cityWeather.add(`H: ${Math.round(weather.main.temp_max)}`);
-    cityWeather.add(`L: ${Math.round(weather.main.temp_min)}`);
-
-    //console.log(cityWeather);
-    cityWeatherData.push(cityWeather);
-    console.log(cityWeatherData);
 } 
 
+//FUNCTIONS FOR OFFSCREEN INFO STORAGE
 
-let urlStorage = []
+let urlStorage = [];
 function cityIdStorage(res) {
     let url = res.url;
     urlStorage.push(url);
-    console.log(urlStorage);
-    }
+    };
 
-function optionSaveInfo () {
-    const save = getElementById("save");
-    save.addEventListener("click", (event) => {
-        cityIdStorage();
-        createList();
-    })
-}
+let cityWeatherData = [];
+let cityData = {};
+function storeWeather(weather) {
+    cityData = {
+        cityName : weather.name,
+        cityTemp : Math.round(weather.main.temp),
+        citySky : weather.weather[0].description,
+        tempHigh : `H: ${Math.round(weather.main.temp_max)}`,
+        tempLow : `L: ${Math.round(weather.main.temp_min)}` 
+     }
+    cityWeatherData.push(cityData);
+    console.log(cityWeatherData);
+};
 
-/*
-function createList(weather) {
+//FUNCTION FOR SAVING ONSCREEN DATA
+let i = 0
+
+function savedOnscreenData(weather) {
     const table = document.getElementById("savedCitiesTable");
-    const newTr = document.createElement("tr");
-    newTr.classList.add(city.id);
-    const tdName = document.createElement("td");
-    const tdTemp = document.createElement("td");
+    let newTr = document.createElement("tr");
+    newTr.classList.add([i]);
+    newTr.id = "cityRow" + [i];
+    console.log(newTr.id);
+    i++
+    let tdName = document.createElement("td");
+    let tdTemp = document.createElement("td");
     const showBtnHome = document.createElement("td");
     const showBtn = document.createElement("button")
-    showBtn.id = "show"
-    showBtn.textContent = "^"
+    showBtn.classList.add([i]);
+    showBtn.id = "Show" + [i];
+    console.log(showBtn.id);
+    showBtn.textContent = "^";
     const removeBtnHome = document.createElement("td");
     const removeBtn = document.createElement("button");
-    removeBtn.id = "remove"
-    removeBtn.textContent ="x"
+    removeBtn.id = "remove" + [i];
+    console.log(removeBtn.id);
+    removeBtn.classList.add([i]);
+    removeBtn.textContent ="x";
+    /*removeBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        let cityWeatherData = cityWeatherData.filter((city) => {
+            return city.id != id;
+        });
+    })*/
 
     tdName.textContent = weather.name;
-    tdTemp.textContent = Math.round(weather.main.temp)
+    tdTemp.textContent = Math.round(weather.main.temp);
 
     newTr.appendChild(tdName);
     newTr.appendChild(tdTemp);
@@ -104,32 +139,39 @@ function createList(weather) {
     removeBtnHome.appendChild(removeBtn);
     newTr.appendChild(removeBtnHome);
     table.appendChild(newTr);
-}*/
+}
 
 
 
-const saveBtn = document.getElementById("save");
-function saveData(weather) {
-    saveBtn.addEventListener("click", (event) => {
-        event.preventDefault();
-       
-        const table = document.getElementById("savedCitiesTable");
-        const newTr = document.createElement("tr");
-        newTr.id = `${city.name}${city.state}`;
-        console.log(city.id);
-        const tdName = document.createElement("td");
-        const tdTemp = document.createElement("td");
+
+/*
+function savedOnscreenData(weather) {
+        newTr.classList.add([i]);
+        newTr.id = "cityRow" + [i];
+        console.log(newTr.id);
+        i++
+        let tdName = document.createElement("td");
+        let tdTemp = document.createElement("td");
         const showBtnHome = document.createElement("td");
         const showBtn = document.createElement("button")
-        showBtn.id = "show"
+        showBtn.classList.add([i]);
+        showBtn.id = "Show" + [i];
+        console.log(showBtn.id);
         showBtn.textContent = "^"
+        showBtn.addEventListener("click", (event) => {
+            if(newTr.id == urlStorage[i]) {
+                //displayWeather(weather);
+                submitInfo()
+            }
+        })
         const removeBtnHome = document.createElement("td");
         const removeBtn = document.createElement("button");
-        removeBtn.id = "remove"
+        removeBtn.id = "remove" + [i];
+        console.log(removeBtn.id);
+        removeBtn.classList.add([i]);
         removeBtn.textContent ="x"
-        removeBtn.addEventListener("click", (event) => {
-            //
-        })
+        //removeBtn.addEventListener("click", (event) => { })
+
 
         tdName.textContent = weather.name;
         tdTemp.textContent = Math.round(weather.main.temp)
@@ -142,7 +184,4 @@ function saveData(weather) {
         newTr.appendChild(removeBtnHome);
         table.appendChild(newTr);
 
-        form.reset();
-    });
-}
-
+    }; */
