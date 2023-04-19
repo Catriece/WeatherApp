@@ -198,7 +198,7 @@ function changeBackground(citySky) {
     }
 
     if(citySky.textContent == "shower rain" || citySky.textContent == "rain" || citySky.textContent == "light rain") {
-        document.getElementById("background").style.backgroundImage="url(images/rain-shower.jpeg)";
+        document.getElementById("background").style.backgroundImage="url(images/rainfall.jpg)";
     }
     if(citySky.textContent == "thunderstorm") {
         document.getElementById("background").style.backgroundImage="url(images/storm-clouds.jpg)";

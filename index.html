@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
-<body id="background">
-    <main>
+<body>
+    <main id="background">
         <div id="temp-box" class="box weatherBox">
             <div id="save-button" ></div>
             <div id="temp-info">
@@ -19,12 +19,6 @@
                 <p id="weather-hi" class="hi-lo">H: __</p>
                 <p id="weather-lo" class="hi-lo">L: __</p>
             </div>
-        </div>
-        <div id="chooseUnit">
-            <label class="switch">
-                <input type="checkbox">
-                <span class="slider round"></span>
-            </label>
         </div>
         <div id="searchbar" class="box">
             <form id="submission">
@@ -40,7 +34,6 @@
         <div id="savedInput" class="box weatherBox">
             <table id="savedCitiesTable">
                 <tr id="new-tr">
-                    <!--<p id="url"></p>-->
                     <td id="city-td"></td>
                     <td id="icon-image">
                         <img src="" alt="">
